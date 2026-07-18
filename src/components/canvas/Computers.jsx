@@ -82,6 +82,21 @@ const ComputersCanvas = () => {
     };
   }, []);
 
+  if (isMobile) {
+    return (
+      <div className="flex h-[420px] w-full items-center justify-center px-6 text-center text-secondary sm:h-[480px]">
+        <div className="max-w-md rounded-3xl border border-white/10 bg-black-100/70 p-8 shadow-[0_0_60px_rgba(145,94,255,0.12)] backdrop-blur-sm">
+          <p className="text-sm uppercase tracking-[0.3em] text-[#915EFF]">3D preview</p>
+          <h3 className="mt-3 text-2xl font-bold text-white">Desktop mockup hidden on mobile</h3>
+          <p className="mt-4 text-sm leading-6 text-secondary">
+            This keeps the hero responsive on phones while the desktop version
+            still shows the full interactive model.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Canvas
       frameloop='demand'

@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
@@ -13,6 +13,39 @@ const Earth = () => {
 };
 
 const EarthCanvas = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 500px)");
+
+    setIsMobile(mediaQuery.matches);
+
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
+
+  if (isMobile) {
+    return (
+      <div className="flex h-[350px] w-full items-center justify-center rounded-2xl border border-white/10 bg-black-100/70 px-6 text-center text-secondary backdrop-blur-sm md:h-[550px]">
+        <div className="max-w-sm">
+          <p className="text-sm uppercase tracking-[0.3em] text-[#915EFF]">Contact</p>
+          <h3 className="mt-3 text-2xl font-bold text-white">Email form optimized for phones</h3>
+          <p className="mt-4 text-sm leading-6 text-secondary">
+            The interactive Earth graphic is disabled on mobile so the contact
+            section stays fast and fully usable.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Canvas
       shadows
