@@ -55,11 +55,13 @@ const EarthCanvas = () => {
       dpr={isMobile ? [1, 1] : [1, 2]}
       gl={{ preserveDrawingBuffer: true, powerPreference: "high-performance" }}
       camera={{ fov: 45, near: 0.1, far: 200, position: [-4, 3, 6] }}
+      style={{ touchAction: "pan-y" }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
           autoRotate
           enableZoom={false}
+          enableRotate={!isMobile}
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />

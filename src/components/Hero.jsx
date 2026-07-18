@@ -15,6 +15,16 @@ const Hero = () => {
   const [displayText, setDisplayText] = useState("");
   const [titleIndex, setTitleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile to disable canvas pointer events (lets page scroll work)
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mq.matches);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   useEffect(() => {
     let ticker = null;
@@ -64,7 +74,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className={`relative w-full h-screen mx-auto`}>
+    <section className={`relative w-full h-screen mx-auto overflow-visible`}>
       <div
         className={`absolute inset-0 sm:top-[120px] top-[110px] z-20 max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5 pointer-events-none`}
       >
@@ -93,7 +103,20 @@ const Hero = () => {
         </div>
       </div>
 
-      <ComputersCanvas />
+      {/*
+        On mobile: pointerEvents=none so ALL touch events (swipe-to-scroll) pass
+        straight through to the page — the canvas only auto-rotates via RAF.
+        On desktop: pointerEvents=auto so mouse drag-to-rotate still works.
+      */}
+      <div
+        className="w-full h-full absolute inset-0"
+        style={{
+          pointerEvents: isMobile ? "none" : "auto",
+          touchAction: "pan-y",
+        }}
+      >
+        <ComputersCanvas />
+      </div>
 
       <div className='absolute xs:bottom-10 bottom-10 w-full flex justify-center items-center'>
         <a href='#about'>

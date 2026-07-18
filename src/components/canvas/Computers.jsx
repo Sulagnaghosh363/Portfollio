@@ -68,16 +68,21 @@ const ComputersCanvas = () => {
   return (
     <Canvas
       shadows
-      // Lower pixel ratio on mobile to reduce GPU memory pressure
       dpr={isMobile ? [1, 1] : [1, 2]}
       camera={{ position: [20, 3, 5], fov: 25 }}
       gl={{ preserveDrawingBuffer: true, powerPreference: "high-performance" }}
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "100%", touchAction: "pan-y" }}
+      // On mobile: disable R3F's synthetic event system entirely so touches
+      // are never consumed by the canvas — page scroll works freely.
+      events={isMobile ? () => ({}) : undefined}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
           autoRotate
           enableZoom={false}
+          // On mobile: disable touch rotation so vertical swipes scroll the page.
+          // Auto-rotate still works — it runs via requestAnimationFrame, not touch input.
+          enableRotate={!isMobile}
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />

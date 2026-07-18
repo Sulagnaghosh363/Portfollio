@@ -40,11 +40,12 @@ const StarsCanvas = () => {
   }, []);
 
   return (
-    <div className='w-full h-auto absolute inset-0 z-[-1]'>
+    <div className='w-full h-auto absolute inset-0 z-[-1]' style={{ touchAction: "pan-y" }}>
       <Canvas
         camera={{ position: [0, 0, 1] }}
         dpr={isMobile ? [1, 1] : [1, 2]}
         gl={{ powerPreference: "high-performance" }}
+        style={{ touchAction: "pan-y" }}
       >
         <Suspense fallback={null}>
           <Stars />
