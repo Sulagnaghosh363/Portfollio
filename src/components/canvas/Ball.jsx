@@ -11,7 +11,6 @@ const Ball = (props) => {
   useEffect(() => {
     let mounted = true;
     const img = new Image();
-    img.crossOrigin = "anonymous";
     img.src = props.imgUrl;
     img.onload = () => {
       if (!mounted) return;
@@ -65,7 +64,6 @@ const BallCanvas = ({ icon }) => {
     }
     // Try to preload the icon. If it fails, don't render the canvas.
     const img = new Image();
-    img.crossOrigin = "anonymous";
     img.src = icon;
     img.onload = () => {
       if (!mounted) return;

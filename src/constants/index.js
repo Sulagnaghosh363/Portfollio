@@ -72,6 +72,10 @@ const technologies = [
 const experiences = [
   {
     title: "UI/UX Designer",
+    company_name: "Tesla",
+    icon: tesla,
+    iconBg: "#E6DEDD",
+    date: "Jan 2023 - Present",
     points: [
       "Designing intuitive interfaces and user journeys for web applications.",
       "Creating wireframes, mockups, and visual systems that improve usability.",
@@ -81,6 +85,10 @@ const experiences = [
   },
   {
     title: "Frontend Web Developer",
+    company_name: "Shopify",
+    icon: shopify,
+    iconBg: "#383E56",
+    date: "Jun 2022 - Dec 2022",
     points: [
       "Developing and maintaining web applications using React.js and other related technologies.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
@@ -90,6 +98,10 @@ const experiences = [
   },
   {
     title: "Backend Developer",
+    company_name: "Starbucks",
+    icon: starbucks,
+    iconBg: "#E6DEDD",
+    date: "Mar 2021 - May 2022",
     points: [
       "Building and maintaining APIs and server-side services for web applications.",
       "Working with databases, authentication flows, and data validation logic.",
@@ -99,6 +111,10 @@ const experiences = [
   },
   {
     title: "Full Stack Developer",
+    company_name: "Meta",
+    icon: meta,
+    iconBg: "#383E56",
+    date: "Jan 2020 - Feb 2021",
     points: [
       "Developing and maintaining web applications using React.js and other related technologies.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
